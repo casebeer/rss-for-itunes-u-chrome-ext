@@ -1,6 +1,9 @@
 SIZES=16 19 38 48 128
 ICONS=$(foreach size, $(SIZES), icons/icon$(size).png)
 
+extension.zip : $(ICONS) LICENSE manifest.json background.js popup.js popup.html
+	zip $@ $^
+
 icons : $(ICONS)
 
 icons/icon%.png :: icons/icon.svg
@@ -14,3 +17,4 @@ icons/icon%.png :: icons/icon.svg
 
 clean: /dev/null
 	rm -f icons/icon*.png
+	rm -f extension.zip
